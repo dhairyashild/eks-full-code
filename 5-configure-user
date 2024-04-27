@@ -1,0 +1,12 @@
+aws configure --profile user1
+aws sts get-caller-identity --profile user1
+
+# ~/.aws/config
+
+[profile eks-admin]
+role_arn        = arn:aws:iam::YOUR_ACCOUNT_ID:role/eks-admin
+source_profile  = user1
+
+aws sts get-caller-identity --profile eks-admin
+
+aws eks update-kubeconfig --name my-eks --region us-east-1 --profile eks-admin
